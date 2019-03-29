@@ -1,3 +1,7 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -15,7 +19,7 @@
   <!-- header -->
   <header>
     <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
-      <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">掲示板</a>
+      <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="userUpdateServlet">ユーザー情報更新</a>
       <ul class="navbar-nav px-3">
         <li class="nav-item text-nowrap">
           <a class="nav-link" href="logoutServlet">ログアウト</a>
@@ -30,51 +34,54 @@
 
 
     <!-- エラーメッセージのサンプル(エラーがある場合のみ表示) -->
-    <div class="alert alert-danger" role="alert">エラーがある場合のメッセージサンプル</div>
+    <c:if test="${errMsg != null}" >
+
+    <div class="alert alert-danger" role="alert">
+
+    	${errMsg}
+
+	</div>
+	</c:if>
 
 
-    <form method="post" action="#" class="form-horizontal">
+    <form method="post" action="userUpdateServlet" class="form-horizontal">
+
+    <input type="hidden" name="id" value="${userDetail.loginId}">
+
       <div class="form-group row">
         <label for="loginId" class="col-sm-2 col-form-label">ログインID</label>
         <div class="col-sm-10">
-          <p class="form-control-plaintext">id0001</p>
+          <p class="form-control-plaintext">${userDetail.loginId}</p>
         </div>
       </div>
 
       <div class="form-group row">
         <label for="password" class="col-sm-2 col-form-label">パスワード</label>
         <div class="col-sm-10">
-          <input type="password" class="form-control" id="password">
+          <input type="password" class="form-control" id="password" name="password">
         </div>
       </div>
 
       <div class="form-group row">
         <label for="passwordConf" class="col-sm-2 col-form-label">パスワード(確認)</label>
         <div class="col-sm-10">
-          <input type="password" class="form-control" id="passwordConf">
+          <input type="password" class="form-control" id="passwordConf" name="password2">
         </div>
       </div>
 
       <div class="form-group row">
         <label for="userName" class="col-sm-2 col-form-label">ユーザ名</label>
         <div class="col-sm-10">
-          <input type="text" class="form-control" id="userName" value="田中太郎">
+          <input type="text" class="form-control" id="userName" name="name" value="${userDetail.name}">
         </div>
       </div>
 
-      <div class="form-group row">
-        <label for="birthDate" class="col-sm-2 col-form-label">生年月日</label>
-        <div class="col-sm-10">
-          <input type="date" class="form-control" id="birthDate" value="1989-04-26">
-        </div>
-      </div>
-
-      <div class="submit-button-area">
+       <div class="submit-button-area">
         <button type="submit" value="検索" class="btn btn-primary btn-lg btn-block">登録</button>
       </div>
 
       <div class="col-xs-4">
-        <a href="userList.html">戻る</a>
+        <a href="userListServlet">戻る</a>
       </div>
 
     </form>
